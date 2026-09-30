@@ -24,10 +24,11 @@ require([
         const map = viewElement.map;
         const view = viewElement.view;
 
+        const layerList = document.querySelector("arcgis-layer-list");
+        const layerListExpand = document.getElementById("layerListExpand");
+
         const buildingExplorer = document.getElementById("buildingExplorer");
-        const buildingExplorerExpand = document.getElementById(
-            "buildingExplorerExpand"
-        );
+        const buildingExplorerExpand = document.getElementById("buildingExplorerExpand");
 
         const buildingLayer = new BuildingSceneLayer({
             url: "https://enterprisedev.woolpert.com/server/rest/services/Hosted/36149_AAM_MB_ZZ_M3_G_0001_R2020_S3_P01/SceneServer",
@@ -149,8 +150,6 @@ require([
 
         const groupTitles = groupLayers.map(layer => layer.title);
 
-        const layerList = document.querySelector("arcgis-layer-list");
-
         layerList.listItemCreatedFunction = (event) => {
 
             const item = event.item;
@@ -261,6 +260,25 @@ require([
                 }
             );
         }
+
+        // Only allow one panel to be expanded at a time
+        buildingExplorerExpand.addEventListener(
+            "arcgisPropertyChange",
+            () => {
+                if (buildingExplorerExpand.expanded) {
+                    layerListExpand.expanded = false;
+                }
+            }
+        );
+
+        layerListExpand.addEventListener(
+            "arcgisPropertyChange",
+            () => {
+                if (layerListExpand.expanded) {
+                    buildingExplorerExpand.expanded = false;
+                }
+            }
+        );
     }
 
     initScene().catch((error) => {
