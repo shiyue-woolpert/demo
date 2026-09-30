@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marketing Site</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/5.1/esri/themes/light/main.css" />
+    <script type="module" src="https://js.arcgis.com/5.1/"></script>
+
+    <style>
+        html,
+        body,
+        arcgis-scene {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: block;
+            outline: none;
+        }
+
+        .panel {
+            width: 320px;
+            max-height: 70vh;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <arcgis-scene id="scene" , basemap="satellite" ground="world-elevation" camera-position="144.9606, -37.8133, 90"
+        camera-tilt="65" camera-heading="300">
+
+        <arcgis-zoom slot="top-left"></arcgis-zoom>
+
+        <arcgis-home id="homeWidget" slot="top-left">
+        </arcgis-home>
+
+        <arcgis-compass slot="top-left"></arcgis-compass>
+
+        <arcgis-navigation-toggle slot="top-left">
+        </arcgis-navigation-toggle>
+
+        <arcgis-basemap-toggle id="basemapToggle" next-basemap="gray-vector" , slot="bottom-right">
+        </arcgis-basemap-toggle>
+
+        <arcgis-expand slot="top-right" expand-icon="layers">
+
+            <div class="panel">
+                <arcgis-layer-list></arcgis-layer-list>
+            </div>
+
+        </arcgis-expand>
+
+        <arcgis-expand id="buildingExplorerExpand" slot="top-right" expand-icon="organization" style="display:none;">
+            <div class="panel">
+                <arcgis-building-explorer id="buildingExplorer">
+                </arcgis-building-explorer>
+            </div>
+        </arcgis-expand>
+
+    </arcgis-scene>
+
+    <script type="module" src="app.js"></script>
+
+
+</body>
+
+</html>
