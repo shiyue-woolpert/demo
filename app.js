@@ -199,7 +199,7 @@ require([
             }
         );
 
-        // await buildingLayer.load();
+        await buildingLayer.load();
 
         buildingLayer.allSublayers.forEach(function (sublayer) {
             const isOverview =
